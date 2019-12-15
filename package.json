@@ -1,0 +1,80 @@
+{
+  "name": "voice-list-recorder",
+  "productName": "voice-list-recorder",
+  "version": "1.0.0",
+  "description": "Electron Forge with Webpack and Typescript",
+  "private": true,
+  "scripts": {
+    "start": "electron-webpack dev",
+    "clean": "rm -r dist",
+    "compile": "electron-webpack",
+    "dist:all": "npm run compile && electron-builder -mwl",
+    "dist:mac": "npm run compile && electron-builder -m",
+    "dist:win": "npm run compile && electron-builder -w",
+    "dist:linux": "npm run compile && electron-builder -l",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iluminar-yi/voice-list-recorder.git"
+  },
+  "keywords": [],
+  "author": "Iluminar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iluminar-yi/voice-list-recorder/issues"
+  },
+  "homepage": "https://github.com/iluminar-yi/voice-list-recorder#readme",
+  "build": {
+    "asar": true,
+    "compression": "maximum",
+    "dmg": {
+      "format": "ULFO"
+    },
+    "mac": {
+      "identity": null,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": "x64"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": "x64"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "snap",
+        "AppImage"
+      ],
+      "category": "Audio"
+    }
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "source-map-support": "^0.5.10"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.18",
+    "@types/react-dom": "16.8.4",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "electron": "^5.0.12",
+    "electron-builder": "^21.2.0",
+    "electron-webpack": "^2.7.4",
+    "electron-webpack-eslint": "^5.0.1",
+    "electron-webpack-ts": "^3.2.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.2"
+  }
+}

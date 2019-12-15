@@ -1,0 +1,21 @@
+image: Visual Studio 2017
+
+platform:
+  - x64
+
+cache:
+  - node_modules
+  - '%LOCALAPPDATA%\electron\Cache'
+  - '%LOCALAPPDATA%\electron-builder\cache'
+
+install:
+  - ps: Update-NodeJsInstallation 12.13.1 x64
+  - npm install
+
+build_script:
+  - npm run dist:win
+
+test_script:
+
+artifacts:
+  - path: 'dist/voice-list-recorder-*.*.*-win.zip'
