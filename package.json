@@ -1,7 +1,7 @@
 {
-  "name": "voice-list-recorder",
-  "productName": "voice-list-recorder",
-  "version": "1.0.0",
+  "name": "aie",
+  "productName": "aie",
+  "version": "0.0.0-github-release-setup-2",
   "description": "Electron Forge with Webpack and Typescript",
   "private": true,
   "scripts": {
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iluminar-yi/voice-list-recorder.git"
+    "url": "git+https://github.com/iluminar-yi/aie.git"
   },
   "keywords": [],
   "author": "Iluminar",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iluminar-yi/voice-list-recorder/issues"
+    "url": "https://github.com/iluminar-yi/aie/issues"
   },
-  "homepage": "https://github.com/iluminar-yi/voice-list-recorder#readme",
+  "homepage": "https://github.com/iluminar-yi/aie#readme",
   "build": {
     "asar": true,
     "compression": "maximum",
@@ -43,38 +43,53 @@
     "win": {
       "target": [
         {
-          "target": "zip",
+          "target": "nsis",
           "arch": "x64"
         }
       ]
     },
     "linux": {
       "target": [
-        "snap",
-        "AppImage"
+        {
+          "target": "AppImage",
+          "arch": "x64"
+        }
       ],
       "category": "Audio"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true
     }
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "sanitize-filename": "^1.6.3",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.2",
     "source-map-support": "^0.5.10"
   },
   "devDependencies": {
-    "@types/react": "^16.8.18",
-    "@types/react-dom": "16.8.4",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
-    "electron": "^5.0.12",
+    "electron": "^7.1.5",
     "electron-builder": "^21.2.0",
     "electron-webpack": "^2.7.4",
     "electron-webpack-eslint": "^5.0.1",
     "electron-webpack-ts": "^3.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "fibers": "^4.0.2",
     "node-sass": "^4.13.0",
+    "sass": "^1.23.7",
     "sass-loader": "^8.0.0",
-    "typescript": "^3.7.3",
+    "typescript": "^3.5.3",
     "webpack": "^4.41.2"
   }
 }

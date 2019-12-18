@@ -1,4 +1,4 @@
-# voice-list-recorder
+# aie
 
 A cross-platform audio recorder that is optimized for voice-list recording.
 Voice list is a list of symbols that denote phonemes to be recorded by human voice suppliers.

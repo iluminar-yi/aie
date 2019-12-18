@@ -13,9 +13,9 @@ install:
   - npm install
 
 build_script:
-  - npm run dist:win
+  - npm run dist:win -- -p never
 
 test_script:
 
 artifacts:
-  - path: 'dist/voice-list-recorder-*.*.*-win.zip'
+  - path: 'dist/aie-*-win.zip'

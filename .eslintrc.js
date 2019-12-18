@@ -4,6 +4,9 @@ module.exports = {
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
     ],
+    plugins: [
+        'react-hooks',
+    ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         sourceType: 'module',
@@ -20,5 +23,7 @@ module.exports = {
     rules: {
         quotes: ['error', 'single'],
         'comma-dangle': ['error', 'always-multiline'],
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
     },
 };
