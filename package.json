@@ -1,7 +1,7 @@
 {
   "name": "aie",
   "productName": "aie",
-  "version": "0.0.0-github-release-setup-2",
+  "version": "0.0.0-github-release-setup-3",
   "description": "Electron Forge with Webpack and Typescript",
   "private": true,
   "scripts": {
@@ -65,7 +65,6 @@
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "sanitize-filename": "^1.6.3",
