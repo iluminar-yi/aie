@@ -1,29 +1,67 @@
+const isCi = process.env.CI === 'true' || process.env.CI === 'True';
+
 module.exports = {
-    extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/eslint-recommended',
-        'plugin:@typescript-eslint/recommended',
+  root: true,
+  extends: [
+    'eslint:recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'plugin:react/recommended',
+    // Currently not working, need to define manually
+    // 'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
+    'plugin:jest/all',
+  ],
+  plugins: ['react-hooks'],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    sourceType: 'module',
+    jsx: true,
+    tsconfigRootDir: '.',
+  },
+  env: {
+    browser: true,
+    node: true,
+    es2017: true,
+    jest: true,
+  },
+  globals: {
+    __static: true,
+  },
+  rules: {
+    'no-console': isCi ? 'error' : 'warn',
+    'object-shorthand': ['error', 'always'],
+    'one-var': ['error', 'never'],
+    'sort-imports': [
+      'error',
+      {
+        ignoreCase: false,
+        ignoreDeclarationSort: true,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+      },
     ],
-    plugins: [
-        'react-hooks',
+    yoda: ['error', 'never', { exceptRange: true }],
+    'import/order': [
+      'error',
+      {
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: false,
+        },
+      },
     ],
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-        sourceType: 'module',
-        jsx: true,
-        project: './tsconfig.json',
+    'react/prop-types': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+  },
+  settings: {
+    react: {
+      version: 'detect',
     },
-    env: {
-        browser: true,
-        node: true,
-    },
-    globals: {
-        __static: true,
-    },
-    rules: {
-        quotes: ['error', 'single'],
-        'comma-dangle': ['error', 'always-multiline'],
-        'react-hooks/rules-of-hooks': 'error',
-        'react-hooks/exhaustive-deps': 'warn',
-    },
+  },
 };

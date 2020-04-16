@@ -1,32 +1,32 @@
-import {Locale} from './i18n';
+import { Locale } from './i18n';
 
-export type PageState = '/create-project' | '/recording-studio' | '/';
+export type PageState = 'create-project' | 'recording-studio' | 'start';
 
-export interface VoiceItem {
-    readonly displayText: string;
-    readonly fileSystemName: string;
+export interface RecordingItem {
+  readonly displayText: string;
+  readonly fileSystemName: string;
 }
 
-export interface RecordedVoiceItem extends VoiceItem {
-    audioData?: object;
+export interface RecordedVoiceItem extends RecordingItem {
+  audioExists?: boolean;
 }
 
 export type Consumer<T> = (t: T) => void;
 
 export interface Environment {
-    locale: Locale;
+  locale: Locale;
 }
 
 export type UsingState<S> = [S, Consumer<S>];
 
-export interface VoiceListParser {
-    parse(content: string): Promise<VoiceItem[]>;
+export interface RecordingListParser {
+  parse(content: string): Promise<RecordingItem[]>;
 }
 
 /**
  * Extending default {@link HTMLAudioElement} because it works in Chrome
  * {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/setSinkId}
  */
-export interface ChromeHTMLAudioElement extends HTMLAudioElement{
-    setSinkId(sinkId: string): Promise<void>;
+export interface ChromeHTMLAudioElement extends HTMLAudioElement {
+  setSinkId(sinkId: string): Promise<void>;
 }

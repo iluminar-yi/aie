@@ -9,13 +9,19 @@ cache:
   - '%LOCALAPPDATA%\electron-builder\cache'
 
 install:
-  - ps: Update-NodeJsInstallation 12.13.1 x64
+  - ps: Update-NodeJsInstallation 12.16.2 x64
   - npm install
 
 build_script:
-  - npm run dist:win -- -p never
+  - npm run compile
 
 test_script:
+  - npm run test
+  # Treating app packaging as a step of "testing" that the app packaging works
+  - npm run dist:win -- -p never
 
 artifacts:
   - path: 'dist/aie-*-win.zip'
+  - path: 'dist/aie Setup *.exe'
+  - path: 'dist/aie Setup *.exe.blockmap'
+  - path: 'coverage'
