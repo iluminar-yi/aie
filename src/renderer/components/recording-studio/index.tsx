@@ -4,6 +4,7 @@ import * as path from 'path';
 import toWav from 'audiobuffer-to-wav';
 import * as log from 'electron-log';
 import React, { Fragment, ReactElement, RefObject, useEffect, useRef, useState } from 'react';
+import { useLocalStorage } from 'react-use';
 import { Button, Checkbox, Grid, Header } from 'semantic-ui-react';
 
 import {
@@ -12,7 +13,6 @@ import {
   removeGlobalKeyDownHandler,
   removeGlobalKeyUpHandler,
 } from '../../services/key-event-handler-registry';
-import { loadOnInit, save } from '../../services/local-storage-persistance-service';
 import { ChromeHTMLAudioElement, Consumer, PageState, RecordedVoiceItem, RecordingItem, UsingState } from '../../types';
 import AudioSettings from '../audio-settings';
 import SizedDiv from '../sized-div';
@@ -118,8 +118,8 @@ const RecordingStudio = ({
   setPageState,
 }: RecordingStudioProps): ReactElement => {
   const [recordingFileState, setRecordingFileState]: UsingState<VoiceSamplesOnFileSystemState> = useState({});
-  const [scaleIndex, setScaleIndex] = useState(0);
-  const [voiceItemIndex, setVoiceItemIndex] = useState(0);
+  const [scaleIndex, setScaleIndex] = useLocalStorage('scaleIndex', 0);
+  const [voiceItemIndex, setVoiceItemIndex] = useLocalStorage('voiceItemIndex', 0);
   const [studioState, setStudioState] = useState(StudioState.IDLE);
   const recordedChunks = useRef([] as Blob[]).current;
   const audioPlayBackRef = useRef<ChromeHTMLAudioElement>(null);
@@ -127,13 +127,14 @@ const RecordingStudio = ({
   const [inputDeviceId, setInputDeviceId] = useState('');
   const [outputDeviceId, setOutputDeviceId] = useState('');
   const [[recordKey, playKey, playScaleKey]] = useState(['R', ' ', 'S']);
-  const [volume, setVolume] = useState(100);
-  const [usePTE, setUsePTE] = useState(true);
-  const [showSavingAudioFilePrompt, setShowSavingAudioFilePrompt] = useState(true);
+  const [volume, setVolume] = useLocalStorage('volume', 100);
+  const [usePTE, setUsePTE] = useLocalStorage('usePTE', true);
+  const [showSavingAudioFilePrompt, setShowSavingAudioFilePrompt] = useLocalStorage('showSavingAudioFilePrompt', true);
   const [lastUpdatedTime, setLastUpdatedTime] = useState(new Date());
   const updateFileStatusRef = useRef(async () => {
     return [false, {}] as [boolean, VoiceSamplesOnFileSystemState];
   });
+
   updateFileStatusRef.current = async (): Promise<[boolean, VoiceSamplesOnFileSystemState]> => {
     log.debug('Update file status');
     if (recordingList.length && projectFolder && scales.length) {
@@ -216,16 +217,6 @@ const RecordingStudio = ({
     };
     reader.readAsArrayBuffer(finalBlob);
   };
-
-  {
-    loadOnInit({
-      scaleIndex: setScaleIndex,
-      voiceItemIndex: setVoiceItemIndex,
-      volume: setVolume,
-      usePTE: setUsePTE,
-      showSavingAudioFilePrompt: setShowSavingAudioFilePrompt,
-    });
-  }
 
   useEffect(() => {
     log.debug('Regular scheduled update');
@@ -432,16 +423,6 @@ const RecordingStudio = ({
       audioElement.volume = volume / 100;
     }
   }, [audioPlayBackRef, volume]);
-
-  {
-    save({
-      scaleIndex,
-      voiceItemIndex,
-      volume,
-      usePTE,
-      showSavingAudioFilePrompt,
-    });
-  }
 
   log.debug(studioState);
   return (

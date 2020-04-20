@@ -1,31 +1,24 @@
-import React, { FunctionComponent, ReactElement, useState } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
+import { useLocalStorage } from 'react-use';
 import { Grid } from 'semantic-ui-react';
 
 import CreateProject from './components/create-project';
 import LoadRecordingList from './components/load-recording-list';
 import RecordingStudio from './components/recording-studio';
-import { loadOnInit, save } from './services/local-storage-persistance-service';
 import { PageState, RecordingItem, UsingState } from './types';
 import { Locale } from './types/i18n';
 
 const AieApp: FunctionComponent = () => {
-  const [environment, setEnvironment] = useState({
+  const [environment] = useLocalStorage('environment', {
     locale: Locale.ZH_CN,
   });
-  const [pageState, setPageState]: UsingState<PageState> = useState('start' as PageState);
-  const [recordingList, setRecordingList]: UsingState<RecordingItem[]> = useState([] as RecordingItem[]);
-  const [projectFolder, setProjectFolder]: UsingState<string> = useState('');
-  const [scales, setScales]: UsingState<string[]> = useState([] as string[]);
-
-  {
-    loadOnInit({
-      environment: setEnvironment,
-      pageState: setPageState,
-      recordingList: setRecordingList,
-      projectFolder: setProjectFolder,
-      scales: setScales,
-    });
-  }
+  const [pageState, setPageState]: UsingState<PageState> = useLocalStorage('pageState', 'start' as PageState);
+  const [recordingList, setRecordingList]: UsingState<RecordingItem[]> = useLocalStorage(
+    'recordingList',
+    [] as RecordingItem[],
+  );
+  const [projectFolder, setProjectFolder]: UsingState<string> = useLocalStorage('projectFolder', '');
+  const [scales, setScales]: UsingState<string[]> = useLocalStorage('scales', [] as string[]);
 
   const routePageToComponent = (): ReactElement => {
     switch (pageState) {
@@ -63,7 +56,8 @@ const AieApp: FunctionComponent = () => {
         );
     }
   };
-  const rendered = (
+
+  return (
     <div style={{ padding: '2vh' }}>
       <Grid>
         <Grid.Row>
@@ -89,12 +83,6 @@ const AieApp: FunctionComponent = () => {
       </Grid>
     </div>
   );
-
-  {
-    save({ environment, pageState, recordingList, projectFolder, scales });
-  }
-
-  return rendered;
 };
 
 export default AieApp;
