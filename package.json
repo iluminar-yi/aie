@@ -88,6 +88,11 @@
       "artifactName": "${productName}.${ext}"
     }
   },
+  "electronWebpack": {
+    "renderer": {
+      "webpackConfig": "webpack.renderer.config.js"
+    }
+  },
   "dependencies": {
     "audiobuffer-to-wav": "^1.0.0",
     "electron-log": "^4.1.1",

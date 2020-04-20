@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   bracketSpacing: true,
   jsxBracketSameLine: true,
