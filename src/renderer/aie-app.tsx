@@ -5,20 +5,17 @@ import { Grid } from 'semantic-ui-react';
 import CreateProject from './components/create-project';
 import LoadRecordingList from './components/load-recording-list';
 import RecordingStudio from './components/recording-studio';
-import { PageState, RecordingItem, UsingState } from './types';
+import { PageState, RecordingItem } from './types';
 import { Locale } from './types/i18n';
 
 const AieApp: FunctionComponent = () => {
   const [environment] = useLocalStorage('environment', {
     locale: Locale.ZH_CN,
   });
-  const [pageState, setPageState]: UsingState<PageState> = useLocalStorage('pageState', 'start' as PageState);
-  const [recordingList, setRecordingList]: UsingState<RecordingItem[]> = useLocalStorage(
-    'recordingList',
-    [] as RecordingItem[],
-  );
-  const [projectFolder, setProjectFolder]: UsingState<string> = useLocalStorage('projectFolder', '');
-  const [scales, setScales]: UsingState<string[]> = useLocalStorage('scales', [] as string[]);
+  const [pageState, setPageState] = useLocalStorage('pageState', 'start' as PageState);
+  const [recordingList, setRecordingList] = useLocalStorage('recordingList', [] as RecordingItem[]);
+  const [projectFolder, setProjectFolder] = useLocalStorage('projectFolder', '');
+  const [scales, setScales] = useLocalStorage('scales', [] as string[]);
 
   const routePageToComponent = (): ReactElement => {
     switch (pageState) {

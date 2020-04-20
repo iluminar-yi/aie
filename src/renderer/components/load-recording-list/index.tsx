@@ -4,7 +4,7 @@ import React, { ChangeEventHandler, MouseEventHandler, ReactElement, useState } 
 import { Button, Form, Grid, Header, Label } from 'semantic-ui-react';
 
 import { i18n } from '../../services/i18n';
-import { Consumer, Environment, PageState, RecordingItem, UsingState } from '../../types';
+import { Consumer, Environment, PageState, RecordingItem } from '../../types';
 import { Locale } from '../../types/i18n';
 import I18nText from '../i18n-text';
 
@@ -18,7 +18,7 @@ interface LoadRecordingListProps {
 
 const LoadRecordingList = ({ setPageState, setRecordingList, environment }: LoadRecordingListProps): ReactElement => {
   const { locale } = environment;
-  const [recordingListFilePath, setRecordingListFilePath]: UsingState<null | string> = useState(null as null | string);
+  const [recordingListFilePath, setRecordingListFilePath] = useState(null as null | string);
 
   const onRecordingListFileSelected: ChangeEventHandler<HTMLInputElement> = (e): void => {
     if (!e.target.files) {

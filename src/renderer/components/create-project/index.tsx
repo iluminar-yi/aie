@@ -4,7 +4,7 @@ import { remote } from 'electron';
 import React, { ReactElement, useState } from 'react';
 import { Button, Grid, Header } from 'semantic-ui-react';
 
-import { Consumer, PageState, UsingState } from '../../types';
+import { Consumer, PageState } from '../../types';
 
 interface CreateProjectProps {
   setPageState: Consumer<PageState>;
@@ -39,7 +39,7 @@ const CreateProject = ({
   scales,
   setScales,
 }: CreateProjectProps): ReactElement => {
-  const [userInputtedScale, setUserInputtedScale]: UsingState<string> = useState('');
+  const [userInputtedScale, setUserInputtedScale] = useState('');
 
   /**
    * Currently, the user has to choose the right directory on the first try.

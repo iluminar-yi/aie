@@ -17,8 +17,6 @@ export interface Environment {
   locale: Locale;
 }
 
-export type UsingState<S> = [S, Consumer<S>];
-
 export interface RecordingListParser {
   parse(content: string): Promise<RecordingItem[]>;
 }

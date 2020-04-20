@@ -2,7 +2,7 @@ import * as log from 'electron-log';
 import React, { EffectCallback, Fragment, MutableRefObject, ReactElement, createRef, useEffect, useState } from 'react';
 import { Button, Checkbox, Grid, Input, Label } from 'semantic-ui-react';
 
-import { ChromeHTMLAudioElement, Consumer, UsingState } from '../../types';
+import { ChromeHTMLAudioElement, Consumer } from '../../types';
 import { StudioState } from '../recording-studio';
 import SizedDiv from '../sized-div';
 
@@ -62,9 +62,9 @@ const AudioSettings = ({
   setVolume,
   lastUpdatedTime,
 }: AudioSettingsProps): ReactElement => {
-  const [audioInputDevices, setAudioInputDevices]: UsingState<MediaDeviceInfo[]> = useState([] as MediaDeviceInfo[]);
-  const [audioOutputDevices, setAudioOutputDevices]: UsingState<MediaDeviceInfo[]> = useState([] as MediaDeviceInfo[]);
-  const [audioInputStream, setAudioInputStream]: UsingState<null | MediaStream> = useState(null as null | MediaStream);
+  const [audioInputDevices, setAudioInputDevices] = useState([] as MediaDeviceInfo[]);
+  const [audioOutputDevices, setAudioOutputDevices] = useState([] as MediaDeviceInfo[]);
+  const [audioInputStream, setAudioInputStream] = useState(null as null | MediaStream);
   const [, setAudioCtx] = useState(getDummyAudioContext);
   const [muted, setMuted] = useState(true);
   const [recorder, setRecorder] = useState(null as null | MediaRecorder);

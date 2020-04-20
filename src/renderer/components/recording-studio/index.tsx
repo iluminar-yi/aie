@@ -13,7 +13,7 @@ import {
   removeGlobalKeyDownHandler,
   removeGlobalKeyUpHandler,
 } from '../../services/key-event-handler-registry';
-import { ChromeHTMLAudioElement, Consumer, PageState, RecordedVoiceItem, RecordingItem, UsingState } from '../../types';
+import { ChromeHTMLAudioElement, Consumer, PageState, RecordedVoiceItem, RecordingItem } from '../../types';
 import AudioSettings from '../audio-settings';
 import SizedDiv from '../sized-div';
 
@@ -117,7 +117,7 @@ const RecordingStudio = ({
   scales,
   setPageState,
 }: RecordingStudioProps): ReactElement => {
-  const [recordingFileState, setRecordingFileState]: UsingState<VoiceSamplesOnFileSystemState> = useState({});
+  const [recordingFileState, setRecordingFileState] = useState({} as VoiceSamplesOnFileSystemState);
   const [scaleIndex, setScaleIndex] = useLocalStorage('scaleIndex', 0);
   const [voiceItemIndex, setVoiceItemIndex] = useLocalStorage('voiceItemIndex', 0);
   const [studioState, setStudioState] = useState(StudioState.IDLE);
